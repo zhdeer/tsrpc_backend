@@ -1,4 +1,7 @@
 import { ServiceProto } from 'tsrpc-proto';
+import { ReqExportProtoDts, ResExportProtoDts } from './protocol/PtlExportProtoDts';
+import { ReqGetProtocol, ResGetProtocol } from './protocol/PtlGetProtocol';
+import { ReqSaveProtocol, ResSaveProtocol } from './protocol/PtlSaveProtocol';
 import { ReqUpload, ResUpload } from './upload/PtlUpload';
 import { ReqAdd, ResAdd } from './users/PtlAdd';
 import { ReqDel, ResDel } from './users/PtlDel';
@@ -7,6 +10,18 @@ import { ReqUpdate, ResUpdate } from './users/PtlUpdate';
 
 export interface ServiceType {
     api: {
+        "protocol/ExportProtoDts": {
+            req: ReqExportProtoDts,
+            res: ResExportProtoDts
+        },
+        "protocol/GetProtocol": {
+            req: ReqGetProtocol,
+            res: ResGetProtocol
+        },
+        "protocol/SaveProtocol": {
+            req: ReqSaveProtocol,
+            res: ResSaveProtocol
+        },
         "upload/Upload": {
             req: ReqUpload,
             res: ResUpload
@@ -34,8 +49,26 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 4,
+    "version": 8,
     "services": [
+        {
+            "id": 7,
+            "name": "protocol/ExportProtoDts",
+            "type": "api",
+            "conf": {}
+        },
+        {
+            "id": 8,
+            "name": "protocol/GetProtocol",
+            "type": "api",
+            "conf": {}
+        },
+        {
+            "id": 9,
+            "name": "protocol/SaveProtocol",
+            "type": "api",
+            "conf": {}
+        },
         {
             "id": 6,
             "name": "upload/Upload",
@@ -68,6 +101,446 @@ export const serviceProto: ServiceProto<ServiceType> = {
         }
     ],
     "types": {
+        "protocol/PtlExportProtoDts/ReqExportProtoDts": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "filename",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "base/BaseRequest": {
+            "type": "Interface"
+        },
+        "protocol/PtlExportProtoDts/ResExportProtoDts": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "content",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "suggestedFilename",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "base/BaseResponse": {
+            "type": "Interface"
+        },
+        "protocol/PtlGetProtocol/ReqGetProtocol": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "protocol/PtlGetProtocol/ResGetProtocol": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "version",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "services",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "protocol/PtlGetProtocol/ProtocolServiceItem"
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "types",
+                    "type": {
+                        "type": "Interface",
+                        "indexSignature": {
+                            "keyType": "String",
+                            "type": {
+                                "type": "Reference",
+                                "target": "protocol/PtlGetProtocol/ProtocolTypeItem"
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "typeSources",
+                    "type": {
+                        "type": "Interface",
+                        "indexSignature": {
+                            "keyType": "String",
+                            "type": {
+                                "type": "String"
+                            }
+                        }
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 4,
+                    "name": "typeSourceMap",
+                    "type": {
+                        "type": "Interface",
+                        "indexSignature": {
+                            "keyType": "String",
+                            "type": {
+                                "type": "String"
+                            }
+                        }
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlGetProtocol/ProtocolServiceItem": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "id",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "type",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "reqTypeId",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 4,
+                    "name": "resTypeId",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlGetProtocol/ProtocolTypeItem": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "type",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "extends",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "String"
+                        }
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 2,
+                    "name": "properties",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "protocol/PtlGetProtocol/ProtocolTypePropertyItem"
+                        }
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 3,
+                    "name": "isCustom",
+                    "type": {
+                        "type": "Boolean"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlGetProtocol/ProtocolTypePropertyItem": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "id",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "typeDesc",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "type",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "optional",
+                    "type": {
+                        "type": "Boolean"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlSaveProtocol/ReqSaveProtocol": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseRequest"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "services",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "protocol/PtlSaveProtocol/EditableServiceItem"
+                        }
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "types",
+                    "type": {
+                        "type": "Interface",
+                        "indexSignature": {
+                            "keyType": "String",
+                            "type": {
+                                "type": "Reference",
+                                "target": "protocol/PtlSaveProtocol/EditableTypeItem"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "protocol/PtlSaveProtocol/EditableServiceItem": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "id",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "type",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "reqTypeId",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 4,
+                    "name": "resTypeId",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlSaveProtocol/EditableTypeItem": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "extends",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "String"
+                        }
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 1,
+                    "name": "properties",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "Reference",
+                            "target": "protocol/PtlSaveProtocol/EditablePropertyItem"
+                        }
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 2,
+                    "name": "isCustom",
+                    "type": {
+                        "type": "Boolean"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlSaveProtocol/EditablePropertyItem": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "id",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "type",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "optional",
+                    "type": {
+                        "type": "Boolean"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "protocol/PtlSaveProtocol/ResSaveProtocol": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "base/BaseResponse"
+                    }
+                }
+            ],
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "ok",
+                    "type": {
+                        "type": "Boolean"
+                    }
+                }
+            ]
+        },
         "upload/PtlUpload/ReqUpload": {
             "type": "Interface",
             "extends": [
@@ -97,9 +570,6 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "base/BaseRequest": {
-            "type": "Interface"
-        },
         "upload/PtlUpload/ResUpload": {
             "type": "Interface",
             "extends": [
@@ -120,9 +590,6 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 }
             ]
-        },
-        "base/BaseResponse": {
-            "type": "Interface"
         },
         "users/PtlAdd/ReqAdd": {
             "type": "Interface",

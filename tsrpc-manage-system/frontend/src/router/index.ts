@@ -7,7 +7,15 @@ import 'nprogress/nprogress.css';
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: '/dashboard',
+        redirect: '/protocol',
+    },
+    {
+        path: '/dashboard',
+        redirect: '/protocol',
+    },
+    {
+        path: '/server-user',
+        redirect: '/server-config',
     },
     {
         path: '/',
@@ -15,13 +23,34 @@ const routes: RouteRecordRaw[] = [
         component: Home,
         children: [
             {
-                path: '/dashboard',
-                name: 'dashboard',
-                meta: {
-                    title: '系统首页',
-                    permiss: '1',
-                },
-                component: () => import(/* webpackChunkName: "dashboard" */ '../views/dashboard.vue'),
+                path: '/server-config',
+                name: 'serverConfig',
+                meta: { title: '服务器配置', permiss: '2' },
+                component: () => import(/* webpackChunkName: "serverUser" */ '../views/server-user.vue'),
+            },
+            {
+                path: '/user',
+                name: 'user',
+                meta: { title: '用户', permiss: '2' },
+                component: () => import(/* webpackChunkName: "serverUser" */ '../views/server-user.vue'),
+            },
+            {
+                path: '/protocol-debug',
+                name: 'protocolDebug',
+                meta: { title: '协议调试', permiss: '2' },
+                component: () => import(/* webpackChunkName: "serverUser" */ '../views/server-user.vue'),
+            },
+            {
+                path: '/short-protocol',
+                name: 'shortProtocol',
+                meta: { title: '短连接定义', permiss: '2' },
+                component: () => import(/* webpackChunkName: "shortProtocol" */ '../views/short-protocol.vue'),
+            },
+            {
+                path: '/short-protocol-debug',
+                name: 'shortProtocolDebug',
+                meta: { title: '短连接调试', permiss: '2' },
+                component: () => import(/* webpackChunkName: "serverUser" */ '../views/server-user.vue'),
             },
             {
                 path: '/table',
@@ -138,6 +167,15 @@ const routes: RouteRecordRaw[] = [
                     permiss: '2',
                 },
                 component: () => import(/* webpackChunkName: "import" */ '../views/import.vue'),
+            },
+            {
+                path: '/protocol',
+                name: 'protocol',
+                meta: {
+                    title: '长连接定义',
+                    permiss: '1',
+                },
+                component: () => import(/* webpackChunkName: "protocol" */ '../views/protocol.vue'),
             },
         ],
     },

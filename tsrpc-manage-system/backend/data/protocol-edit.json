@@ -1,0 +1,220 @@
+{
+  "version": 41,
+  "services": [
+    {
+      "id": 1,
+      "name": "login/login",
+      "type": "msg",
+      "reqTypeId": "login/Reqlogin",
+      "resTypeId": "login/Reslogin"
+    },
+    {
+      "id": 2,
+      "name": "user/info",
+      "type": "msg",
+      "reqTypeId": "user/Reqinfo",
+      "resTypeId": "user/Resinfo"
+    },
+    {
+      "id": 3,
+      "name": "bag/bagInfo",
+      "type": "msg",
+      "reqTypeId": "bag/ReqbagInfo",
+      "resTypeId": "bag/ResbagInfo"
+    },
+    {
+      "id": 4,
+      "name": "login/createRole",
+      "type": "msg",
+      "reqTypeId": "login/createRole/ReqcreateRole",
+      "resTypeId": "login/createRole/RescreateRole"
+    },
+    {
+      "id": 5,
+      "name": "mainCity/mainInfo",
+      "type": "msg",
+      "reqTypeId": "mainCity/mainInfo/ReqmainInfo",
+      "resTypeId": "mainCity/mainInfo/ResmainInfo"
+    }
+  ],
+  "types": {
+    "login/Reqlogin": {
+      "extends": [
+        "base/BaseRequest"
+      ],
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "uid",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "id": 1,
+          "name": "token",
+          "type": "string",
+          "optional": false
+        }
+      ]
+    },
+    "login/Reslogin": {
+      "extends": [
+        "base/BaseResponse"
+      ],
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "uid",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "id": 1,
+          "name": "success",
+          "type": "boolean",
+          "optional": false
+        },
+        {
+          "id": 2,
+          "name": "msg",
+          "type": "string",
+          "optional": false
+        }
+      ]
+    },
+    "user/Reqinfo": {
+      "extends": [
+        "base/BaseRequest"
+      ],
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "uid",
+          "type": "number",
+          "optional": false
+        }
+      ]
+    },
+    "user/Resinfo": {
+      "extends": [
+        "base/BaseResponse"
+      ],
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "info",
+          "type": "User_base",
+          "optional": false
+        }
+      ]
+    },
+    "User_base": {
+      "isCustom": true,
+      "properties": [
+        {
+          "id": 0,
+          "name": "uid",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "id": 1,
+          "name": "uName",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "id": 2,
+          "name": "uLevel",
+          "type": "number",
+          "optional": false
+        }
+      ]
+    },
+    "bag/ReqbagInfo": {
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "uid",
+          "type": "number",
+          "optional": false
+        }
+      ]
+    },
+    "bag/ResbagInfo": {
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "info",
+          "type": "Item_base[]",
+          "optional": false
+        }
+      ]
+    },
+    "Item_base": {
+      "isCustom": true,
+      "properties": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "number",
+          "optional": false
+        },
+        {
+          "id": 1,
+          "name": "count",
+          "type": "number",
+          "optional": false
+        }
+      ]
+    },
+    "login/createRole/ReqcreateRole": {
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "serverId",
+          "type": "number",
+          "optional": false
+        }
+      ]
+    },
+    "login/createRole/RescreateRole": {
+      "isCustom": false,
+      "properties": [
+        {
+          "id": 0,
+          "name": "result",
+          "type": "boolean",
+          "optional": false
+        },
+        {
+          "id": 1,
+          "name": "msg",
+          "type": "string",
+          "optional": false
+        },
+        {
+          "id": 2,
+          "name": "roleId",
+          "type": "number",
+          "optional": false
+        }
+      ]
+    },
+    "mainCity/mainInfo/ReqmainInfo": {
+      "isCustom": false,
+      "properties": []
+    },
+    "mainCity/mainInfo/ResmainInfo": {
+      "isCustom": false,
+      "properties": []
+    }
+  }
+}

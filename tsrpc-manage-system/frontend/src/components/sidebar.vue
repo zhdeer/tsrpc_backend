@@ -64,18 +64,41 @@ interface MenuItems {
 }
 const items = ref<MenuItems[]>([
     {
-        icon: 'Odometer',
-        index: '/dashboard',
-        title: '系统首页',
+        icon: 'Document',
+        index: '/protocol',
+        title: '长连接定义',
         permiss: 1,
     },
     {
-        icon: 'User',
-        index: '/table',
-        title: '用户管理',
+        icon: 'Setting',
+        index: '/server-config',
+        title: '服务器配置',
         permiss: 2,
     },
-
+    {
+        icon: 'User',
+        index: '/user',
+        title: '用户',
+        permiss: 2,
+    },
+    {
+        icon: 'Connection',
+        index: '/protocol-debug',
+        title: '协议调试',
+        permiss: 2,
+    },
+    {
+        icon: 'Document',
+        index: '/short-protocol',
+        title: '短连接定义',
+        permiss: 2,
+    },
+    {
+        icon: 'Connection',
+        index: '/short-protocol-debug',
+        title: '短连接调试',
+        permiss: 2,
+    },
     {
         icon: 'CoffeeCup',
         index: '/donate',
